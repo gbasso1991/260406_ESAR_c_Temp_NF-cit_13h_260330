@@ -115,72 +115,29 @@ def lector_ciclos(filepath):
 
     return t,H_Vs,M_Vs,H_kAm,M_Am,metadata
 #%% Obtengo ciclos y resultados para cada concentracion - Todo a 300 kHz
-# 08 hs
-ciclos_08 = glob("NF08hs/**/**/**/*ciclo_promedio_H_M.txt") 
-resultados_08 = glob("NF08hs/**/**/**/*resultados.txt")
-ciclos_08.sort()
-resultados_08.sort()
-conc_08 = 41.0 #g/L
+
 
 # 13 hs
-ciclos_13 = glob("NF13hs/**/**/**/*ciclo_promedio_H_M.txt")
-resultados_13 = glob("NF13hs/**/**/**/*resultados.txt")
+ciclos_13 = glob("**/**/**/*ciclo_promedio_H_M.txt")
+resultados_13 = glob("**/**/**/*resultados.txt")
+
 ciclos_13.sort()
 resultados_13.sort()
-conc_13 = 26.7 #g/L
+conc_13 = 20 #g/L
 
-# 18 hs
-ciclos_18 = glob("NF18hs/**/**/**/*ciclo_promedio_H_M.txt")
-resultados_18 = glob("NF18hs/**/**/**/*resultados.txt")
-ciclos_18.sort()
-resultados_18.sort()
-conc_18 = 56.4/2 #g/L
-
-for p in ciclos_08:
-    print('  ',p)
 for p in ciclos_13:
     print('  ',p)
-for p in ciclos_18:
-    print('  ',p)
 
-print('\n')
-for res in resultados_08:
-    print('  ',res)
 for res in resultados_13:
     print('  ',res)
-for res in resultados_18:
-    print('  ',res)
-    
+
 #%% Ploteo Ciclos Promedio 
 fig00, (ax,ax2,ax3) =plt.subplots(1,3,figsize=(15,5),constrained_layout=True,sharey=True,sharex=True)
-
-for i,e in enumerate(ciclos_08):
-    if '100dA' in e:
-        _,_,_, H_08,M_08,_ = lector_ciclos(ciclos_08[i])
-        ax.plot(H_08/1000,M_08,'-',label=f'NF{i}')
-
-for i,e in enumerate(ciclos_08):
-    if '125dA' in e:
-        _,_,_, H_08,M_08,_ = lector_ciclos(ciclos_08[i])
-        ax2.plot(H_08/1000,M_08,'-',label=f'NF{i}')
-
-for i,e in enumerate(ciclos_08):
-    if '150dA' in e:
-        _,_,_, H_08,M_08,_ = lector_ciclos(ciclos_08[i])
-        ax3.plot(H_08/1000,M_08,'-',label=f'NF{i}')
 
 ax.set_ylabel('M (A/m)')
 ax.set_title('38 kA/m',loc='left')
 ax2.set_title('47 kA/m',loc='left')
 ax3.set_title('57 kA/m',loc='left')
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.set_xlabel('H (kA/m)')
-    a.legend(loc='upper left')
-plt.suptitle('Comparativa ciclos promedio NF 08 hs\n300 kHz')
-
-fig01, (ax,ax2,ax3) =plt.subplots(1,3,figsize=(15,5),constrained_layout=True,sharey=True,sharex=True)
 
 for i,e in enumerate(ciclos_13):
     if '100dA' in e:
@@ -197,179 +154,22 @@ for i,e in enumerate(ciclos_13):
         _,_,_, H_13,M_13,_ = lector_ciclos(ciclos_13[i])
         ax3.plot(H_13/1000,M_13,'-',label=f'NF{i}')
 
-ax.set_ylabel('M (A/m)')
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('47 kA/m',loc='left')
-ax3.set_title('57 kA/m',loc='left')
-
 for a in ax,ax2,ax3:
     a.grid()
     a.set_xlabel('H (kA/m)')
     a.legend(loc='upper left')
 plt.suptitle('Comparativa ciclos promedio NF 13 hs\n300 kHz')
-
-fig020, (ax,ax2,ax3) =plt.subplots(1,3,figsize=(15,5),constrained_layout=True,sharey=True,sharex=True)
-
-for i,e in enumerate(ciclos_18):
-    if '100dA' in e:
-        _,_,_, H_18,M_18,_ = lector_ciclos(ciclos_18[i])
-        ax.plot(H_18/1000,M_18,'-',label=f'NF{str(i).zfill(2)}')
-
-for i,e in enumerate(ciclos_18):
-    if '110dA' in e:
-        _,_,_, H_18,M_18,_ = lector_ciclos(ciclos_18[i])
-        ax2.plot(H_18/1000,M_18,'-',label=f'NF{str(i).zfill(2)}')
-
-for i,e in enumerate(ciclos_18):
-    if '120dA' in e:
-        _,_,_, H_18,M_18,_ = lector_ciclos(ciclos_18[i])
-        ax3.plot(H_18/1000,M_18,'-',label=f'NF{str(i).zfill(2)}')
-
-ax.set_ylabel('M (A/m)')
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('42 kA/m',loc='left')
-ax3.set_title('45 kA/m',loc='left')
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.set_xlabel('H (kA/m)')
-    a.legend(loc='upper left')
-plt.suptitle('Comparativa ciclos promedio NF 18 hs\n300 kHz')
-
-
-fig021, (ax,ax2,ax3) =plt.subplots(1,3,figsize=(15,5),constrained_layout=True,sharey=True,sharex=True)
-
-for i,e in enumerate(ciclos_18):
-    if '130dA' in e:
-        _,_,_, H_18,M_18,_ = lector_ciclos(ciclos_18[i])
-        ax.plot(H_18/1000,M_18,'-',label=f'NF{i}')
-
-for i,e in enumerate(ciclos_18):
-    if '140dA' in e:
-        _,_,_, H_18,M_18,_ = lector_ciclos(ciclos_18[i])
-        ax2.plot(H_18/1000,M_18,'-',label=f'NF{i}')
-
-for i,e in enumerate(ciclos_18):
-    if ('150dA' in e) and not ('full' in e):
-        _,_,_, H_18,M_18,_ = lector_ciclos(ciclos_18[i])
-        ax3.plot(H_18/1000,M_18,'-',label=f'NF{i}')
-
-ax.set_ylabel('M (A/m)')
-ax.set_title('50 kA/m',loc='left')
-ax2.set_title('53 kA/m',loc='left')
-ax3.set_title('57 kA/m',loc='left')
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.set_xlabel('H (kA/m)')
-    a.legend(loc='upper left')
-plt.suptitle('Comparativa ciclos promedio NF 18 hs\n300 kHz')
-
-#%% Salvo comparativa ciclos promedio
-figs=[fig00,fig01,fig020,fig021]
-names=['ciclos_promedio_NF08h_38_47_57',
-       'ciclos_promedio_NF13h_38_47_57',
-       'ciclos_promedio_NF18h_38_42_45',
-       'ciclos_promedio_NF18h_50_53_57']
-
-for i,e in enumerate(zip(figs,names)):
-    e[0].savefig(f'0_{e[1]}.png',dpi=300)
+plt.savefig('0_ciclos_promedio_NF13h_38_47_57.png',dpi=300)
 
 #%% Listas con Resultados
-res_08=[]
-print('Resultados 08 hs', '='*80,'\n')
-for r in resultados_08:
-    res_08.append(ResultadosESAR(os.path.dirname(r)))
 
 res_13=[]
 print('Resultados 13 hs', '='*80,'\n')
 for r in resultados_13:
     res_13.append(ResultadosESAR(os.path.dirname(r)))
-    
-res_18=[]
-print('Resultados 18 hs', '='*80,'\n')
-for r in resultados_18:
-    if not 'full' in r:
-        res_18.append(ResultadosESAR(os.path.dirname(r)))
-    
 
 #%% 1- Templogs
-# 8 hs
-rates_08_38=[]
-ecSAR_08_38=[]
-rates_08_47=[]
-ecSAR_08_47=[]
-rates_08_57=[]
-ecSAR_08_57=[]
-
-fig10, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(12,8),constrained_layout=True,sharey=True,sharex=True)
-
-for i,r in enumerate(res_08):
-    if '100' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_08_38.append(rate)
-        ecSAR_08_38.append(rate*4186/conc_08)
-        print(f'ecSAR = {ecSAR_08_38[-1]:.2f} W/g')
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax.plot(r.time,r.temperatura,'.-',label=label)
-
-for i,r in enumerate(res_08):
-    if '125' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_08_47.append(rate)
-        ecSAR_08_47.append(rate*4186/conc_08)
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax2.plot(r.time,r.temperatura,'.-',label=label)
-
-for i,r in enumerate(res_08):
-    if '150' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_08_57.append(rate)
-        ecSAR_08_57.append(rate*4186/conc_08)
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax3.plot(r.time,r.temperatura,'.-',label=label)
-
-rate_08_38=ufloat(np.mean(rates_08_38),np.std(rates_08_38))
-rate_08_47=ufloat(np.mean(rates_08_47),np.std(rates_08_47))
-rate_08_57=ufloat(np.mean(rates_08_57),np.std(rates_08_57))
-
-ecSAR_08_38=ufloat(np.mean(ecSAR_08_38),np.std(ecSAR_08_38))
-ecSAR_08_47=ufloat(np.mean(ecSAR_08_47),np.std(ecSAR_08_47))
-ecSAR_08_57=ufloat(np.mean(ecSAR_08_57),np.std(ecSAR_08_57))
-
-ax.text(0.98,0.1,f'WR = {rate_08_38:.1uS} °C/s\necSAR = {ecSAR_08_38:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='bottom',
-        transform=ax.transAxes)
-
-ax2.text(0.98,0.1,f'WR = {rate_08_47:.1uS} °C/s\necSAR = {ecSAR_08_47:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='bottom',
-        transform=ax2.transAxes)
-ax3.text(0.98,0.1,f'WR = {rate_08_57:.1uS} °C/s\necSAR = {ecSAR_08_57:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='bottom',
-        transform=ax3.transAxes)
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.legend(loc='upper left')
-    a.set_ylabel('T (ºC)')
-ax.set_xlim(0,40)
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('47 kA/m',loc='left')    
-ax3.set_title('57 kA/m',loc='left')    
-
-ax3.set_xlabel('t (s)')
-plt.suptitle(f'Templogs\nNF 08 hs - {conc_08:.1f} g/L')
-
-#%% 13 hs
+# 13 hs
 rates_13_38=[]
 ecSAR_13_38=[]
 rates_13_47=[]
@@ -379,7 +179,7 @@ ecSAR_13_57=[]
 fig11, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(12,8),constrained_layout=True,sharey=True,sharex=True)
 
 for i,r in enumerate(res_13):
-    if '100' in r.directorio:
+    if ('38_100' in r.directorio):
         dt = r.time[-1]-r.time[0]
         dT = r.temperatura[-1]-r.temperatura[0]
         rate=dT/dt
@@ -389,7 +189,7 @@ for i,r in enumerate(res_13):
         ax.plot(r.time,r.temperatura,'.-',label=label)
 
 for i,r in enumerate(res_13):
-    if '125' in r.directorio:
+    if ('47_125' in r.directorio):
         dt = r.time[-1]-r.time[0]
         dT = r.temperatura[-1]-r.temperatura[0]
         rate=dT/dt
@@ -399,7 +199,7 @@ for i,r in enumerate(res_13):
         ax2.plot(r.time,r.temperatura,'.-',label=label)
 
 for i,r in enumerate(res_13):
-    if ('150' in r.directorio) and ('125' not in r.directorio):
+    if ('57_150' in r.directorio):
         dt = r.time[-1]-r.time[0]
         dT = r.temperatura[-1]-r.temperatura[0]
         rate=dT/dt
@@ -440,203 +240,10 @@ ax2.set_title('47 kA/m',loc='left')
 ax3.set_title('57 kA/m',loc='left')    
 ax3.set_xlabel('t (s)')
 plt.suptitle(f'Templogs\nNF 13 hs - {conc_13:.1f} g/L')
-
-#%% 18 hs
-rates_18_38,rates_18_42,rates_18_45,rates_18_50,rates_18_53,rates_18_57=[],[],[],[],[],[]
-ecSAR_18_38,ecSAR_18_42,ecSAR_18_45,ecSAR_18_50,ecSAR_18_53,ecSAR_18_57=[],[],[],[],[],[]
-
-fig100, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(12,8),constrained_layout=True,sharey=True,sharex=True)
-
-for i,r in enumerate(res_18):
-    if '100dA' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_18_38.append(rate)
-        ecSAR_18_38.append(rate*4186/conc_18)
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax.plot(r.time,r.temperatura,'.-',label=label)
-
-for i,r in enumerate(res_18):
-    if '110dA' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_18_42.append(rate)
-        ecSAR_18_42.append(rate*4186/conc_18)
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax2.plot(r.time,r.temperatura,'.-',label=label)
-
-for i,r in enumerate(res_18):
-    if '120dA' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_18_45.append(rate)
-        ecSAR_18_45.append(rate*4186/conc_18)
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax3.plot(r.time,r.temperatura,'.-',label=label)
-rate_18_38=ufloat(np.mean(rates_18_38),np.std(rates_18_38))
-ecSAR_18_38=ufloat(np.mean(ecSAR_18_38),np.std(ecSAR_18_38))
-rate_18_42=ufloat(np.mean(rates_18_42),np.std(rates_18_42))
-ecSAR_18_42=ufloat(np.mean(ecSAR_18_42),np.std(ecSAR_18_42))
-rate_18_45=ufloat(np.mean(rates_18_45),np.std(rates_18_45))
-ecSAR_18_45=ufloat(np.mean(ecSAR_18_45),np.std(ecSAR_18_45))    
-
-ax.text(0.98,0.5,f'WR = {rate_18_38:.1uS} °C/s\necSAR = {ecSAR_18_38:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='center',
-        transform=ax.transAxes) 
-ax2.text(0.98,0.5,f'WR = {rate_18_42:.1uS} °C/s\necSAR = {ecSAR_18_42:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='center',
-        transform=ax2.transAxes)
-
-ax3.text(0.98,0.5,f'WR = {rate_18_45:.1uS} °C/s\necSAR = {ecSAR_18_45:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='center',
-        transform=ax3.transAxes)
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.legend(loc='lower right')
-    a.set_ylabel('T (ºC)')
-ax.set_xlim(0,)
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('42 kA/m',loc='left')    
-ax3.set_title('45 kA/m',loc='left')    
-ax3.set_xlabel('t (s)')
-plt.suptitle(f'Templogs\nNF 18 hs - {conc_18:.1f} g/L')
-
-fig101, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(12,8),constrained_layout=True,sharey=True,sharex=True)
-
-for i,r in enumerate(res_18):
-    if '130dA' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_18_50.append(rate)
-        ecSAR_18_50.append(rate*4186/conc_18)
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax.plot(r.time,r.temperatura,'.-',label=label)
-
-for i,r in enumerate(res_18):
-    if '140dA' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_18_53.append(rate)
-        ecSAR_18_53.append(rate*4186/conc_18)
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax2.plot(r.time,r.temperatura,'.-',label=label)
-
-for i,r in enumerate(res_18):
-    if '150dA' in r.directorio:
-        dt = r.time[-1]-r.time[0]
-        dT = r.temperatura[-1]-r.temperatura[0]
-        rate=dT/dt
-        rates_18_57.append(rate)
-        ecSAR_18_57.append(rate*4186/conc_18)
-        label=f'$\Delta$t= {dt:.2f} s  $\Delta$T= {dT:.2f} °C  WR= {rate:.2f} °C/s'
-        ax3.plot(r.time,r.temperatura,'.-',label=label)
-
-rate_18_50=ufloat(np.mean(rates_18_50),np.std(rates_18_50))
-ecSAR_18_50=ufloat(np.mean(ecSAR_18_50),np.std(ecSAR_18_50))
-rate_18_53=ufloat(np.mean(rates_18_53),np.std(rates_18_53))
-ecSAR_18_53=ufloat(np.mean(ecSAR_18_53),np.std(ecSAR_18_53))
-rate_18_57=ufloat(np.mean(rates_18_57),np.std(rates_18_57))
-ecSAR_18_57=ufloat(np.mean(ecSAR_18_57),np.std(ecSAR_18_57))
-ax.text(0.98,0.5,f'WR = {rate_18_50:.1uS} °C/s\necSAR = {ecSAR_18_50:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='center',
-        transform=ax.transAxes)
-ax2.text(0.98,0.5,f'WR = {rate_18_53:.1uS} °C/s\necSAR = {ecSAR_18_53:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='center',
-        transform=ax2.transAxes)
-ax3.text(0.98,0.5,f'WR = {rate_18_57:.1uS} °C/s\necSAR = {ecSAR_18_57:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='center',
-        transform=ax3.transAxes)
-for a in ax,ax2,ax3:
-    a.grid()
-    a.legend(loc='lower right')
-    a.set_ylabel('T (ºC)')
-ax.set_xlim(0,)
-ax.set_title('50 kA/m',loc='left')
-ax2.set_title('53 kA/m',loc='left')    
-ax3.set_title('57 kA/m',loc='left')    
-ax3.set_xlabel('t (s)')
-plt.suptitle(f'Templogs\nNF 18 hs - {conc_18:.1f} g/L')
-
-#%% Salvo templogs
-figs=[fig10,fig11,fig100,fig101]
-names=['Templog_NF08h_38_47_57',
-       'Templog_NF13h_38_47_57',
-       'Templog_NF18h_38_42_45',
-       'Templog_NF18h_50_53_57']
-
-for i,e in enumerate(zip(figs,names)):
-    e[0].savefig(f'1_{e[1]}.png',dpi=300)
+plt.savefig('1_Templog_NF13h_38_47_57.png',dpi=300)
 
 #%% 2 - Tau vs time / Temp
-# 8 hs
-#tau_08_all=ufloat(np.mean(np.concatenate([r.tau for r in res_08])),np.std(np.concatenate([r.tau for r in res_08])))
-
-fig200, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(12,8),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_08):
-    if '100dA' in r.directorio:
-        ax.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_08):
-    if '125dA' in r.directorio:
-        ax2.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_08):
-    if '150dA' in r.directorio:
-        ax3.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.legend(loc='best')
-    a.set_ylabel('τ (ns)')
-ax.set_xlim(0,)
-ax.set_title('NF - 5 g/L',loc='left')
-ax2.set_title('NF - 10 g/L',loc='left')   
-ax3.set_xlabel('t (s)')
-
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('47 kA/m',loc='left')    
-ax3.set_title('57 kA/m',loc='left')  
-plt.suptitle(f'tau vs time\nNF 8 hs - {conc_08:0.1f} g/L' )
-#%%
-fig201, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(12,8),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_08):
-    if '100dA' in r.directorio:
-        ax.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_08):
-    if '125dA' in r.directorio:
-        ax2.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_08):
-    if '150dA' in r.directorio:
-        ax3.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.legend(loc='upper right')
-    a.set_ylabel('τ (ns)')
-ax3.set_xlabel('T (°C)')
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('47 kA/m',loc='left')    
-ax3.set_title('57 kA/m',loc='left')  
-
-plt.suptitle(f'tau vs Temperatura\nNF 8 hs - {conc_08:0.1f} g/L' )
-
-#%% 13 hs
+#% 13 hs
 
 fig210, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(12,8),constrained_layout=True,sharey=False,sharex=True)
 
@@ -668,15 +275,15 @@ plt.suptitle(f'tau vs time\nNF 13 hs - {conc_13:0.1f} g/L' )
 fig211, (ax,ax2,ax3) = plt.subplots(3,1,figsize=(12,8),constrained_layout=True,sharey=False,sharex=True)
 
 for i,r in enumerate(res_13):
-    if '100dA' in r.directorio:
+    if '38_100' in r.directorio:
         ax.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
 
 for i,r in enumerate(res_13):
-    if '125dA' in r.directorio:
+    if '47_125' in r.directorio:
         ax2.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
 
 for i,r in enumerate(res_13):
-    if '150dA' in r.directorio:
+    if '57_150' in r.directorio:
         ax3.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
 
 for a in ax,ax2,ax3:
@@ -689,187 +296,23 @@ ax2.set_title('47 kA/m',loc='left')
 ax3.set_title('57 kA/m',loc='left')  
 
 plt.suptitle(f'tau vs Temperatura\nNF 13 hs - {conc_13:0.1f} g/L' )
- 
-#%% 18 hs 
-fig220, (ax,ax2,ax3,ax4,ax5,ax6) =plt.subplots(6,1,figsize=(12,10),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_18):
-    if '100dA' in r.directorio:
-        ax.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '110dA' in r.directorio:
-        ax2.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '120dA' in r.directorio:
-        ax3.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '130dA' in r.directorio:
-        ax4.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '140dA' in r.directorio:
-        ax5.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-        
-for i,r in enumerate(res_18):
-    if '150dA' in r.directorio:
-        ax6.plot(r.time,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for a in ax,ax2,ax3,ax4,ax5,ax6:
-    a.grid()
-    a.legend(loc='best')
-    a.set_ylabel('τ (ns)')
-ax.set_xlim(0,)
-
-ax6.set_xlabel('t (s)')
-
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('42 kA/m',loc='left')    
-ax3.set_title('45 kA/m',loc='left')  
-ax4.set_title('50 kA/m',loc='left')
-ax5.set_title('53 kA/m',loc='left')    
-ax6.set_title('57 kA/m',loc='left')  
-plt.suptitle(f'tau vs time\nNF 18 hs - {conc_18:0.1f} g/L' )
-
-fig221, (ax,ax2,ax3,ax4,ax5,ax6) =plt.subplots(6,1,figsize=(10,10),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_18):
-    if '100dA' in r.directorio:
-        ax.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '110dA' in r.directorio:
-        ax2.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '120dA' in r.directorio:
-        ax3.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '130dA' in r.directorio:
-        ax4.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '140dA' in r.directorio:
-        ax5.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-        
-for i,r in enumerate(res_18):
-    if '150dA' in r.directorio:
-        ax6.plot(r.temperatura,r.tau,'.-',label=f'NF{str(i).zfill(2)}')
-
-for a in ax,ax2,ax3,ax4,ax5,ax6:
-    a.grid()
-    a.legend(loc='best')
-    a.set_ylabel('τ (ns)')
-ax6.set_xlabel('T (°C)')
-
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('42 kA/m',loc='left')    
-ax3.set_title('45 kA/m',loc='left')  
-ax4.set_title('50 kA/m',loc='left')
-ax5.set_title('53 kA/m',loc='left')    
-ax6.set_title('57 kA/m',loc='left')  
-plt.suptitle(f'tau vs Temperatura\nNF 18 hs - {conc_18:0.1f} g/L' )
-#%% Salvo figs tau
-figs=[fig200,fig201,fig210,fig211,fig220,fig221]
-names=['tau_vs_time_NF08h_38_47_57',
-       'tau_vs_Temp_NF08h_38_47_57',
-       'tau_vs_time_NF13h_38_47_57',
-       'tau_vs_Temp_NF13h_38_47_57',
-       'tau_vs_time_NF18h_38_42_45_50_53_57',
-       'tau_vs_Temp_NF18h_38_42_45_50_53_57',
-    ]   
-
-for i,e in enumerate(zip(figs,names)):
-    e[0].savefig(f'2_{e[1]}.png',dpi=300)
+plt.savefig('2_tau_NF13h_38_47_57.png',dpi=300) 
 
 #%% 3 - ESAR vs time / Temp
-# 8 hs
-ESAR_08_100,ESAR_08_125,ESAR_08_150=[],[],[]
-fig300, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_08):
-    if '100dA' in r.directorio:
-        ax.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_08_100.append(r.SAR)
-for i,r in enumerate(res_08):
-    if '125dA' in r.directorio:
-        ax2.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_08_125.append(r.SAR)
-for i,r in enumerate(res_08):
-    if '150dA' in r.directorio:
-        ax3.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_08_150.append(r.SAR)
-for a in ax,ax2,ax3:
-    a.grid()
-    #a.legend(loc='best')
-    a.set_ylabel('ESAR (W/g)')
-ax.set_xlim(0,)
-ax3.set_xlabel('t (s)')
-ESAR_08_100 = ufloat(np.mean(np.concatenate(ESAR_08_100)),np.std(np.concatenate(ESAR_08_100)))
-ESAR_08_125 = ufloat(np.mean(np.concatenate(ESAR_08_125)),np.std(np.concatenate(ESAR_08_125)))
-ESAR_08_150 = ufloat(np.mean(np.concatenate(ESAR_08_150)),np.std(np.concatenate(ESAR_08_150)))
-
-ax.text(0.98,0.9,f'ESAR = {ESAR_08_100:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax.transAxes)
-
-ax2.text(0.98,0.9,f'ESAR = {ESAR_08_125:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax2.transAxes)
-ax3.text(0.98,0.9,f'ESAR = {ESAR_08_150:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax3.transAxes)
-
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('47 kA/m',loc='left')    
-ax3.set_title('57 kA/m',loc='left')  
-plt.suptitle(f'ESAR vs time\nNF 8 hs - {conc_08:0.1f} g/L' )
-
-fig301, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_08):
-    if '100dA' in r.directorio:
-        ax.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_08):
-    if '125dA' in r.directorio:
-        ax2.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_08):
-    if '150dA' in r.directorio:
-        ax3.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.legend(loc='upper right')
-    a.set_ylabel('ESAR (W/g)')
-ax3.set_xlabel('T (°C)')
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('47 kA/m',loc='left')    
-ax3.set_title('57 kA/m',loc='left')  
-
-plt.suptitle(f'ESAR vs Temperatura\nNF 8 hs - {conc_08:0.1f} g/L' )
-
-#%% 13 hs
+#% 13 hs
 ESAR_13_100,ESAR_13_125,ESAR_13_150=[],[],[]
 fig310, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
 
 for i,r in enumerate(res_13):
-    if '100dA' in r.directorio:
+    if '38_100' in r.directorio:
         ax.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
         ESAR_13_100.append(r.SAR)
 for i,r in enumerate(res_13):
-    if '125dA' in r.directorio:
+    if '47_125' in r.directorio:
         ax2.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
         ESAR_13_125.append(r.SAR)
 for i,r in enumerate(res_13):
-    if '150dA' in r.directorio:
+    if '57_150' in r.directorio:
         ax3.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
         ESAR_13_150.append(r.SAR)
 for a in ax,ax2,ax3:
@@ -900,19 +343,20 @@ ax.set_title('38 kA/m',loc='left')
 ax2.set_title('47 kA/m',loc='left')    
 ax3.set_title('57 kA/m',loc='left')  
 plt.suptitle(f'ESAR vs time\nNF 13 hs - {conc_13:0.1f} g/L' )
+plt.savefig('3_ESAR_vs_time_NF13h_38_47_57.png',dpi=300)
 
 fig311, (ax,ax2,ax3) = plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
 
 for i,r in enumerate(res_13):
-    if '100dA' in r.directorio:
+    if '38_100' in r.directorio:
         ax.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
 
 for i,r in enumerate(res_13):
-    if '125dA' in r.directorio:
+    if '47_125' in r.directorio:
         ax2.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
 
 for i,r in enumerate(res_13):
-    if '150dA' in r.directorio:
+    if '57_150' in r.directorio:
         ax3.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
 
 for a in ax,ax2,ax3:
@@ -923,241 +367,27 @@ ax3.set_xlabel('T (°C)')
 ax.set_title('38 kA/m',loc='left')
 ax2.set_title('47 kA/m',loc='left')    
 ax3.set_title('57 kA/m',loc='left')  
-
+ax3.set_xlim(20,100)
 plt.suptitle(f'ESAR vs Temperatura\nNF 13 hs - {conc_13:0.1f} g/L' )
- 
-#%% 18 hs 
-ESAR_18_100,ESAR_18_110,ESAR_18_120,ESAR_18_130,ESAR_18_140,ESAR_18_150=[],[],[],[],[],[]
-fig320, (ax,ax2,ax3,ax4,ax5,ax6) =plt.subplots(6,1,figsize=(10,10),constrained_layout=True,sharey=False,sharex=True)
+plt.savefig('3_ESAR_vs_Temp_NF13h_38_47_57.png',dpi=300) 
 
-for i,r in enumerate(res_18):
-    if '100dA' in r.directorio:
-        ax.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_18_100.append(r.SAR)
-for i,r in enumerate(res_18):
-    if '110dA' in r.directorio:
-        ax2.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_18_110.append(r.SAR)
-for i,r in enumerate(res_18):
-    if '120dA' in r.directorio:
-        ax3.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_18_120.append(r.SAR)
-for i,r in enumerate(res_18):
-    if '130dA' in r.directorio:
-        ax4.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_18_130.append(r.SAR)
-for i,r in enumerate(res_18):
-    if '140dA' in r.directorio:
-        ax5.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_18_140.append(r.SAR)
-for i,r in enumerate(res_18):
-    if '150dA' in r.directorio:
-        ax6.plot(r.time,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        ESAR_18_150.append(r.SAR)
-for a in ax,ax2,ax3,ax4,ax5,ax6:
-    a.grid()
-    #.legend(loc='best')
-    a.set_ylabel('ESAR (W/g)')
-ax.set_xlim(0,)
-
-ESAR_18_100=ufloat(np.mean(np.concatenate(ESAR_18_100)),np.std(np.concatenate(ESAR_18_100)))
-ESAR_18_110=ufloat(np.mean(np.concatenate(ESAR_18_110)),np.std(np.concatenate(ESAR_18_110)))
-ESAR_18_120=ufloat(np.mean(np.concatenate(ESAR_18_120)),np.std(np.concatenate(ESAR_18_120)))
-ESAR_18_130=ufloat(np.mean(np.concatenate(ESAR_18_130)),np.std(np.concatenate(ESAR_18_130)))
-ESAR_18_140=ufloat(np.mean(np.concatenate(ESAR_18_140)),np.std(np.concatenate(ESAR_18_140)))
-ESAR_18_150=ufloat(np.mean(np.concatenate(ESAR_18_150)),np.std(np.concatenate(ESAR_18_150)))
-
-ax.text(0.98,0.2,f'ESAR = {ESAR_18_100:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax.transAxes)
-
-ax2.text(0.98,0.2,f'ESAR = {ESAR_18_110:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax2.transAxes)
-
-ax3.text(0.98,0.2,f'ESAR = {ESAR_18_120:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax3.transAxes)
-
-ax4.text(0.98,0.2,f'ESAR = {ESAR_18_130:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax4.transAxes)
-
-ax5.text(0.98,0.2,f'ESAR = {ESAR_18_140:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax5.transAxes)
-ax6.text(0.98,0.2,f'ESAR = {ESAR_18_150:.2uS} W/g',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax6.transAxes)
-
-ax6.set_xlabel('t (s)')
-
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('42 kA/m',loc='left')    
-ax3.set_title('45 kA/m',loc='left')  
-ax4.set_title('50 kA/m',loc='left')
-ax5.set_title('53 kA/m',loc='left')    
-ax6.set_title('57 kA/m',loc='left')  
-plt.suptitle(f'ESAR vs time\nNF 18 hs - {conc_18:0.1f} g/L' )
-#%%
-fig321, (ax,ax2,ax3,ax4,ax5,ax6) = plt.subplots(6,1,figsize=(10,10),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_18):
-    if '100dA' in r.directorio:
-        ax.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '110dA' in r.directorio:
-        ax2.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '120dA' in r.directorio:
-        ax3.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '130dA' in r.directorio:
-        ax4.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_18):
-    if '140dA' in r.directorio:
-        ax5.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-        
-for i,r in enumerate(res_18):
-    if '150dA' in r.directorio:
-        ax6.plot(r.temperatura,r.SAR,'.-',label=f'NF{str(i).zfill(2)}')
-
-for a in ax,ax2,ax3,ax4,ax5,ax6:
-    a.grid()
-    a.legend(loc='best')
-    a.set_ylabel('ESAR (W/g)')
-ax6.set_xlabel('T (°C)')
-
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('42 kA/m',loc='left')    
-ax3.set_title('45 kA/m',loc='left')  
-ax4.set_title('50 kA/m',loc='left')
-ax5.set_title('53 kA/m',loc='left')    
-ax6.set_title('57 kA/m',loc='left')  
-plt.suptitle(f'ESAR vs Temperatura\nNF 18 hs - {conc_18:0.1f} g/L' )
-
-#%% Salvo graficos ESAR
-
-figs=[fig300,fig301,fig310,fig311,fig320,fig321]
-names=['ESAR_vs_time_NF08h_38_47_57',
-       'ESAR_vs_Temp_NF08h_38_47_57',
-       'ESAR_vs_time_NF13h_38_47_57',
-       'ESAR_vs_Temp_NF13h_38_47_57',
-       'ESAR_vs_time_NF18h_38_42_45_50_53_57',
-       'ESAR_vs_Temp_NF18h_38_42_45_50_53_57',
-    ]   
-
-for i,e in enumerate(zip(figs,names)):
-    e[0].savefig(f'3_{e[1]}.png',dpi=300)
-
-#%% 4 - Hc vs time/Temp
 #%% 3 - Hc vs time / Temp
-# 8 hs
-HC_08_100,HC_08_125,HC_08_150=[],[],[]
-fig400, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_08):
-    if '100dA' in r.directorio:
-        ax.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-        HC_08_100.append(r.Hc)
-
-for i,r in enumerate(res_08):
-    if '125dA' in r.directorio:
-        ax2.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-        HC_08_125.append(r.Hc)
-
-for i,r in enumerate(res_08):
-    if '150dA' in r.directorio:
-        ax3.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-        HC_08_150.append(r.Hc)
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.set_ylabel('Hc (kA/m)')
-
-ax.set_xlim(0,)
-ax3.set_xlabel('t (s)')
-
-HC_08_100 = ufloat(np.mean(np.concatenate(HC_08_100)),np.std(np.concatenate(HC_08_100)))
-HC_08_125 = ufloat(np.mean(np.concatenate(HC_08_125)),np.std(np.concatenate(HC_08_125)))
-HC_08_150 = ufloat(np.mean(np.concatenate(HC_08_150)),np.std(np.concatenate(HC_08_150)))
-
-ax.text(0.98,0.9,f'Hc = {HC_08_100:.2uS}',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax.transAxes)
-
-ax2.text(0.98,0.9,f'Hc = {HC_08_125:.2uS}',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax2.transAxes)
-
-ax3.text(0.98,0.9,f'Hc = {HC_08_150:.2uS}',
-        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
-        ha='right',va='top',
-        transform=ax3.transAxes)
-
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('47 kA/m',loc='left')    
-ax3.set_title('57 kA/m',loc='left')
-
-plt.suptitle(f'Hc vs time\nNF 8 hs - {conc_08:0.1f} g/L')
-
-
-fig401, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_08):
-    if '100dA' in r.directorio:
-        ax.plot(r.temperatura,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_08):
-    if '125dA' in r.directorio:
-        ax2.plot(r.temperatura,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-
-for i,r in enumerate(res_08):
-    if '150dA' in r.directorio:
-        ax3.plot(r.temperatura,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-
-for a in ax,ax2,ax3:
-    a.grid()
-    a.legend(loc='upper right')
-    a.set_ylabel('Hc (kA/m)')
-
-ax3.set_xlabel('T (°C)')
-
-ax.set_title('38 kA/m',loc='left')
-ax2.set_title('47 kA/m',loc='left')    
-ax3.set_title('57 kA/m',loc='left')
-
-plt.suptitle(f'Hc vs Temperatura\nNF 8 hs - {conc_08:0.1f} g/L')
-
-#%%
 # 13 hs
 HC_13_100,HC_13_125,HC_13_150=[],[],[]
 fig410, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
 
 for i,r in enumerate(res_13):
-    if '100dA' in r.directorio:
+    if '38_100' in r.directorio:
         ax.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
         HC_13_100.append(r.Hc)
 
 for i,r in enumerate(res_13):
-    if '125dA' in r.directorio:
+    if '47_125' in r.directorio:
         ax2.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
         HC_13_125.append(r.Hc)
 
 for i,r in enumerate(res_13):
-    if '150dA' in r.directorio:
+    if '57_150' in r.directorio:
         ax3.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
         HC_13_150.append(r.Hc)
 
@@ -1191,116 +421,82 @@ ax.set_title('38 kA/m',loc='left')
 ax2.set_title('47 kA/m',loc='left')    
 ax3.set_title('57 kA/m',loc='left')
 
-plt.suptitle(f'Hc vs time\nNF 8 hs - {conc_13:0.1f} g/L')
-
-
-#%%
-figs=[fig400,fig401,fig410]
-names=['Hc_vs_time_NF08h_38_47_57',
-       'Hc_vs_Temp_NF08h_38_47_57',
-       'Hc_vs_time_NF13h_38_47_57',
-       ]   
-
-for i,e in enumerate(zip(figs,names)):
-    e[0].savefig(f'4_{e[1]}.png',dpi=300)
+plt.suptitle(f'Hc vs time\nNF 13 hs - {conc_13:0.1f} g/L')
+plt.savefig('4_Hc_vs_time_NF13h_38_47_57.png',dpi=300)
 
 #%% 5 - Mag Max vs time/Temp
 
-fig50, (ax,ax2) =plt.subplots(2,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
+Mr_13_100,Mr_13_125,Mr_13_150=[],[],[]
+fig410, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
 
-for i,r in enumerate(res_05):
-    dM = r.mag_max[-1]-r.mag_max[0]
-    label=f'NF{i}  $\Delta$'+'M$_{max}$ = '+f'{dM:.1f} A/m '
-    ax.plot(r.time,r.mag_max,'.-',label=label)
+for i,r in enumerate(res_13):
+    if '38_100' in r.directorio:
+        ax.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
+        HC_13_100.append(r.Hc)
 
-for i,r in enumerate(res_10):
-    dM = r.mag_max[-1]-r.mag_max[0]
-    label=f'NF{i} - $\Delta$'+'M$_{max}$ = '+f'{dM:.1f} A/m '
-    ax2.plot(r.time,r.mag_max,'.-',label=label)
+for i,r in enumerate(res_13):
+    if '47_125' in r.directorio:
+        ax2.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
+        HC_13_125.append(r.Hc)
 
-for a in ax,ax2:
+for i,r in enumerate(res_13):
+    if '57_150' in r.directorio:
+        ax3.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
+        HC_13_150.append(r.Hc)
+
+for a in ax,ax2,ax3:
     a.grid()
-    a.legend(loc='best')
-    a.set_ylabel('M$_{max}$ (A/m)')
+    a.set_ylabel('Hc (kA/m)')
+
 ax.set_xlim(0,)
-ax.set_title('NF - 5 g/L',loc='left')
-ax2.set_title('NF - 10 g/L',loc='left')    
-ax2.set_xlabel('t (s)')
-plt.suptitle('M$_{max}$ NF vs time - 5 g/L & 10 g/L')
+ax3.set_xlabel('t (s)')
+
+HC_13_100 = ufloat(np.mean(np.concatenate(HC_13_100)),np.std(np.concatenate(HC_13_100)))
+HC_13_125 = ufloat(np.mean(np.concatenate(HC_13_125)),np.std(np.concatenate(HC_13_125)))
+HC_13_150 = ufloat(np.mean(np.concatenate(HC_13_150)),np.std(np.concatenate(HC_13_150)))
+
+ax.text(0.98,0.2,f'H$_c$ = {HC_13_100:.2uS}',
+        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
+        ha='right',va='top',
+        transform=ax.transAxes)
+
+ax2.text(0.98,0.2,f'H$_c$ = {HC_13_125:.2uS}',
+        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
+        ha='right',va='top',
+        transform=ax2.transAxes)
+
+ax3.text(0.98,0.2,f'H$_c$ = {HC_13_150:.2uS}',
+        bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
+        ha='right',va='top',
+        transform=ax3.transAxes)
+
+ax.set_title('38 kA/m',loc='left')
+ax2.set_title('47 kA/m',loc='left')    
+ax3.set_title('57 kA/m',loc='left')
+
+plt.suptitle(f'Hc vs time\nNF 13 hs - {conc_13:0.1f} g/L')
+plt.savefig('4_Hc_vs_time_NF13h_38_47_57.png',dpi=300)
 
 
-fig51, (ax,ax2) =plt.subplots(2,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
-
-for i,r in enumerate(res_05):
-    dM = r.mag_max[-1]-r.mag_max[0]
-    label=f'NF{i} - $\Delta$'+'M$_{max}$ = '+f'{dM:.1f} A/m '
-    ax.plot(r.temperatura,r.mag_max,'.-',label=label)
-
-for i,r in enumerate(res_10):
-    dM = r.mag_max[-1]-r.mag_max[0]
-    label=f'NF{i} - $\Delta$'+'M$_{max}$ = '+f'{dM:.1f} A/m '
-    ax2.plot(r.temperatura,r.mag_max,'.-',label=label)
-
-for a in ax,ax2:
-    a.grid()
-    a.legend(loc='upper right')
-    a.set_ylabel('M$_{max}$ (A/m)')
-ax.set_xlim(24,75)
-ax.set_title('NF - 5 g/L',loc='left')
-ax2.set_title('NF - 10 g/L',loc='left')    
-ax2.set_xlabel('T (°C)')
-plt.suptitle('M$_{max}$ NF vs temperatura - 5 g/L & 10 g/L')
 
 
-# %% Salvo las figuras 
-figs=[fig0,fig1,fig20,fig21,fig30,fig31,fig40,fig41,fig50,fig51]
-names=['ciclos_promedio_NF5_NF10',
-       'templog_NF5_NF10',
-       'tau_vs_time_NF5_NF10',
-       'tau_vs_Temp_NF5_NF10',
-       'SAR_vs_time_NF5_NF10',
-       'SAR_vs_Temp_NF5_NF10',
-       'Hc_vs_time_NF5_NF10',
-       'Hc_vs_Temp_NF5_NF10',
-       'Mmax_vs_time_NF5_NF10',
-       'Mmax_vs_Temp_NF5_NF10' ]
 
 
-for i,e in enumerate(zip(figs,names)):
-    e[0].savefig(f'{i}_{e[1]}.png',dpi=300)
-
-# %% Ploteo ciclos internos
-_,_,_, H_08_100,M_08_100,_ = lector_ciclos(ciclos_08[1])
-_,_,_, H_08_125,M_08_125,_ = lector_ciclos(ciclos_08[4])
-_,_,_, H_08_150,M_08_150,_ = lector_ciclos(ciclos_08[7])
+#%%
 
 _,_,_, H_13_100,M_13_100,_ = lector_ciclos(ciclos_13[1])
 _,_,_, H_13_125,M_13_125,_ = lector_ciclos(ciclos_13[4])
 _,_,_, H_13_150,M_13_150,_ = lector_ciclos(ciclos_13[8])
 
-_,_,_, H_18_100,M_18_100,_ = lector_ciclos(ciclos_18[1])
-_,_,_, H_18_120,M_18_120,_ = lector_ciclos(ciclos_18[6])
-_,_,_, H_18_150,M_18_150,_ = lector_ciclos(ciclos_18[17])
-
-fig40, (ax,ax2,ax3) =plt.subplots(1,3,figsize=(15,5),constrained_layout=True,sharey=True,sharex=False)
-
-ax.plot(H_08_100/1000,M_08_100,'-',label='38')
-ax.plot(H_08_125/1000,M_08_125,'-',label='47')
-ax.plot(H_08_150/1000,M_08_150,'-',label='57')
+fig40, ax2 =plt.subplots(figsize=(6,6),constrained_layout=True,sharey=True,sharex=False)
 
 ax2.plot(H_13_100/1000,M_13_100,'-',label='38')
 ax2.plot(H_13_125/1000,M_13_125,'-',label='47')
 ax2.plot(H_13_150/1000,M_13_150,'-',label='57')
 
-ax3.plot(H_18_100/1000,M_18_100,'-',label='38')
-ax3.plot(H_18_120/1000,M_18_120,'-',label='45')
-ax3.plot(H_18_150/1000,M_18_150,'-',label='57')
-
         
 ax.set_ylabel('M (A/m)')
-ax.set_title(f'08 hs   C={conc_08:0.1f} g/L',loc='left')
 ax2.set_title(f'13 hs   C={conc_13:0.1f} g/L',loc='left')
-ax3.set_title(f'18 hs   C={conc_18:0.1f} g/L',loc='left')
 
 ax.set_xticks([-57,-47,-38,0,38,47,57])
 ax2.set_xticks([-57,-47,-38,0,38,47,57])
@@ -1310,4 +506,4 @@ for a in ax,ax2,ax3:
     a.set_xlabel('H (kA/m)')
     a.legend(title='H$_0$ (kA/m)',loc='upper left')
 plt.suptitle('Comparativa ciclos promedio NF@cit\n300 kHz')
-plt.savefig('0_comparativa_ciclos_internos_08_13_18_hs.png',dpi=300)
+#plt.savefig('0_comparativa_ciclos_internos_08_13_18_hs.png',dpi=300)
