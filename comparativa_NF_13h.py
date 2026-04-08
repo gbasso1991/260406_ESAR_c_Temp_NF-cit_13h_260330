@@ -123,7 +123,7 @@ resultados_13 = glob("**/**/**/*resultados.txt")
 
 ciclos_13.sort()
 resultados_13.sort()
-conc_13 = 20 #g/L
+conc_13 = 24 #g/L
 
 for p in ciclos_13:
     print('  ',p)
@@ -424,29 +424,29 @@ ax3.set_title('57 kA/m',loc='left')
 plt.suptitle(f'Hc vs time\nNF 13 hs - {conc_13:0.1f} g/L')
 plt.savefig('4_Hc_vs_time_NF13h_38_47_57.png',dpi=300)
 
-#%% 5 - Mag Max vs time/Temp
+#%% 5 - Mag Remanente vs time/Temp
 
 Mr_13_100,Mr_13_125,Mr_13_150=[],[],[]
 fig410, (ax,ax2,ax3) =plt.subplots(3,1,figsize=(10,6),constrained_layout=True,sharey=False,sharex=True)
 
 for i,r in enumerate(res_13):
     if '38_100' in r.directorio:
-        ax.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-        Mr_13_100.append(r.Hc)
+        ax.plot(r.time,r.Mr,'.-',label=f'NF{str(i).zfill(2)}')
+        Mr_13_100.append(r.Mr)
 
 for i,r in enumerate(res_13):
     if '47_125' in r.directorio:
-        ax2.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-        Mr_13_125.append(r.Hc)
+        ax2.plot(r.time,r.Mr,'.-',label=f'NF{str(i).zfill(2)}')
+        Mr_13_125.append(r.Mr)
 
 for i,r in enumerate(res_13):
     if '57_150' in r.directorio:
-        ax3.plot(r.time,r.Hc,'.-',label=f'NF{str(i).zfill(2)}')
-        Mr_13_150.append(r.Hc)
+        ax3.plot(r.time,r.Mr,'.-',label=f'NF{str(i).zfill(2)}')
+        Mr_13_150.append(r.Mr)
 
 for a in ax,ax2,ax3:
     a.grid()
-    a.set_ylabel('Hc (kA/m)')
+    a.set_ylabel('Mr (A/m)')
 
 ax.set_xlim(0,)
 ax3.set_xlabel('t (s)')
@@ -477,7 +477,7 @@ ax3.set_title('57 kA/m',loc='left')
 plt.suptitle(f'Mr vs time\nNF 13 hs - {conc_13:0.1f} g/L')
 plt.savefig('4_Mr_vs_time_NF13h_38_47_57.png',dpi=300)
 
-#%%
+#%% Ciclos todos
 _,_,_, H_13_100,M_13_100,_ = lector_ciclos(ciclos_13[1])
 _,_,_, H_13_125,M_13_125,_ = lector_ciclos(ciclos_13[4])
 _,_,_, H_13_150,M_13_150,_ = lector_ciclos(ciclos_13[8])
