@@ -325,17 +325,17 @@ ESAR_13_100 = ufloat(np.mean(np.concatenate(ESAR_13_100)),np.std(np.concatenate(
 ESAR_13_125 = ufloat(np.mean(np.concatenate(ESAR_13_125)),np.std(np.concatenate(ESAR_13_125)))
 ESAR_13_150 = ufloat(np.mean(np.concatenate(ESAR_13_150)),np.std(np.concatenate(ESAR_13_150)))
 
-ax.text(0.98,0.2,f'ESAR = {ESAR_13_100:.2uS} W/g',
+ax.text(0.98,0.2,f'ESAR = {ESAR_13_100:.3uS} W/g',
         bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
         ha='right',va='top',
         transform=ax.transAxes)
 
-ax2.text(0.98,0.2,f'ESAR = {ESAR_13_125:.2uS} W/g',
+ax2.text(0.98,0.2,f'ESAR = {ESAR_13_125:.3uS} W/g',
         bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
         ha='right',va='top',
         transform=ax2.transAxes)
 
-ax3.text(0.98,0.2,f'ESAR = {ESAR_13_150:.2uS} W/g',
+ax3.text(0.98,0.2,f'ESAR = {ESAR_13_150:.3uS} W/g',
         bbox=dict(boxstyle="round", fc='C3',alpha=0.6,lw=1),
         ha='right',va='top',
         transform=ax3.transAxes)    
